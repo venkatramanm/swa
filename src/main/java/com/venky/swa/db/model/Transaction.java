@@ -25,4 +25,8 @@ public interface Transaction extends Model{
 	public double getTransactionAmount(); 
 	public void setTransactionAmount(double transactionAmount);
 
+	public long getCurrencyId();
+	public void setCurrencyId(long currencyId);
+	public Currency getCurrency();
+	
 }
