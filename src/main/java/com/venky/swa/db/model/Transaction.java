@@ -15,18 +15,18 @@ public interface Transaction extends Model{
 	public void setDescription(String description);
 	
 	public Account getFromAccount();
-	public long getFromAccountId();
-	public void setFromAccountId(long fromAccountId);
+	public int getFromAccountId();
+	public void setFromAccountId(int fromAccountId);
 	
 	public Account getToAccount();
-	public long getToAccountId();
-	public void setToAccountId(long toAccountId);
+	public int getToAccountId();
+	public void setToAccountId(int toAccountId);
 	
 	public double getTransactionAmount(); 
 	public void setTransactionAmount(double transactionAmount);
 
-	public long getCurrencyId();
-	public void setCurrencyId(long currencyId);
+	public int getCurrencyId();
+	public void setCurrencyId(int currencyId);
 	public Currency getCurrency();
 	
 }

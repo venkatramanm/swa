@@ -19,8 +19,8 @@ public interface Account extends Model{
     public String getName();
     public void setName(String name);
     
-    public long getAccountTypeId();
-    public void setAccountTypeId(long accountTypeId);
+    public int getAccountTypeId();
+    public void setAccountTypeId(int accountTypeId);
     public AccountType getAccountType();
     
     
