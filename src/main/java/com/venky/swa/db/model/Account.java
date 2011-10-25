@@ -7,6 +7,7 @@ package com.venky.swa.db.model;
 import java.util.List;
 
 import com.venky.swf.db.annotations.column.IS_VIRTUAL;
+import com.venky.swf.db.annotations.column.validations.Mandatory;
 import com.venky.swf.db.annotations.model.HAS_DESCRIPTION_COLUMN;
 import com.venky.swf.db.model.Model;
 
@@ -19,13 +20,20 @@ public interface Account extends Model{
     public String getName();
     public void setName(String name);
     
+    @Mandatory
     public int getAccountTypeId();
     public void setAccountTypeId(int accountTypeId);
     public AccountType getAccountType();
     
-    
-    public List<Transaction> getTransactions();
-    @IS_VIRTUAL
+	@Mandatory
+	public int getCurrencyId();
+	public void setCurrencyId(int currencyId);
+	public Currency getCurrency();
+
+	@IS_VIRTUAL
     public double getBalance();
     public void setBalance(double balance);
+    
+    public List<Transaction> getTransactions();
+    
 }

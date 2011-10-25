@@ -1,5 +1,7 @@
 package com.venky.swa.db.model;
 
+import java.util.List;
+
 import com.venky.swf.db.annotations.model.HAS_DESCRIPTION_COLUMN;
 import com.venky.swf.db.model.Model;
 
@@ -7,4 +9,6 @@ import com.venky.swf.db.model.Model;
 public interface Currency extends Model{
 	public String getName();
 	public void setName(String name);
+	
+	public List<Account> getAccounts();
 }
