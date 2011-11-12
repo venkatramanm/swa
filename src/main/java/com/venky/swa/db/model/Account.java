@@ -6,7 +6,9 @@ package com.venky.swa.db.model;
 
 import java.util.List;
 
+import com.venky.swf.db.annotations.column.COLUMN_DEF;
 import com.venky.swf.db.annotations.column.IS_VIRTUAL;
+import com.venky.swf.db.annotations.column.defaulting.StandardDefault;
 import com.venky.swf.db.annotations.column.validations.Mandatory;
 import com.venky.swf.db.annotations.model.HAS_DESCRIPTION_COLUMN;
 import com.venky.swf.db.model.Model;
@@ -26,6 +28,7 @@ public interface Account extends Model{
     public AccountType getAccountType();
     
 	@Mandatory
+	@COLUMN_DEF(StandardDefault.ONE)
 	public int getCurrencyId();
 	public void setCurrencyId(int currencyId);
 	public Currency getCurrency();
