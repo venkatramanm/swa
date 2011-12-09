@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import com.venky.swf.db.annotations.column.COLUMN_DEF;
 import com.venky.swf.db.annotations.column.defaulting.StandardDefault;
+import com.venky.swf.db.annotations.column.pm.PARTICIPANT;
 import com.venky.swf.db.annotations.column.validations.Mandatory;
 import com.venky.swf.db.model.Model;
 
@@ -16,11 +17,13 @@ public interface Transaction extends Model{
 	public void setDescription(String description);
 	
 	@Mandatory
+	@PARTICIPANT
 	public int getFromAccountId();
 	public void setFromAccountId(int fromAccountId);
 	public Account getFromAccount();
 	
 	@Mandatory
+	@PARTICIPANT
 	public int getToAccountId();
 	public void setToAccountId(int toAccountId);
 	public Account getToAccount();

@@ -9,6 +9,7 @@ import java.util.List;
 import com.venky.swf.db.annotations.column.COLUMN_DEF;
 import com.venky.swf.db.annotations.column.IS_VIRTUAL;
 import com.venky.swf.db.annotations.column.defaulting.StandardDefault;
+import com.venky.swf.db.annotations.column.pm.PARTICIPANT;
 import com.venky.swf.db.annotations.column.validations.Mandatory;
 import com.venky.swf.db.annotations.model.HAS_DESCRIPTION_COLUMN;
 import com.venky.swf.db.model.Model;
@@ -39,4 +40,6 @@ public interface Account extends Model{
     
     public List<Transaction> getTransactions();
     
+    @PARTICIPANT
+    public Integer getCreatorUserId();
 }
