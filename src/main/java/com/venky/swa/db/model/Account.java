@@ -7,6 +7,7 @@ package com.venky.swa.db.model;
 import java.util.List;
 
 import com.venky.swf.db.annotations.column.COLUMN_DEF;
+import com.venky.swf.db.annotations.column.IS_NULLABLE;
 import com.venky.swf.db.annotations.column.IS_VIRTUAL;
 import com.venky.swf.db.annotations.column.defaulting.StandardDefault;
 import com.venky.swf.db.annotations.column.pm.PARTICIPANT;
@@ -37,6 +38,11 @@ public interface Account extends Model{
 	@IS_VIRTUAL
     public double getBalance();
     public void setBalance(double balance);
+    
+    @IS_VIRTUAL
+    @IS_NULLABLE
+    public Double getIncomeTax();
+    
     
     public List<Transaction> getTransactions();
     
