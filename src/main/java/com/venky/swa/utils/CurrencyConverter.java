@@ -7,8 +7,11 @@ import java.util.List;
 import com.venky.core.date.DateUtils;
 import com.venky.swa.db.model.Currency;
 import com.venky.swa.db.model.CurrencyConversionFactor;
+import com.venky.swf.db.Database;
 import com.venky.swf.db.table.BindVariable;
-import com.venky.swf.db.table.Query;
+import com.venky.swf.sql.Expression;
+import com.venky.swf.sql.Operator;
+import com.venky.swf.sql.Select;
 
 public class CurrencyConverter {
 	private static final CurrencyConverter converter = new CurrencyConverter();
@@ -29,11 +32,22 @@ public class CurrencyConverter {
 		if (fromCurrency.getId() == toCurrency.getId()){
 			return cf;
 		}
-		Query q = new Query(CurrencyConversionFactor.class);
-		q.select().where("((from_currency_id = ? and to_currency_id = ?) or (to_currency_id = ? and from_currency_id = ?))",
-				new BindVariable(fromCurrency.getId()),new BindVariable(toCurrency.getId()),
-				new BindVariable(fromCurrency.getId()),new BindVariable(toCurrency.getId())
-				);
+		Select q = new Select();
+		q.from(Database.getInstance().getTable(CurrencyConversionFactor.class).getTableName());
+		Expression whereClause = new Expression("OR");
+		
+		Expression expression1 =  new Expression("AND");
+		expression1.add(new Expression("from_currency_id",Operator.EQ,new BindVariable(fromCurrency.getId())));
+		expression1.add(new Expression("to_currency_id",Operator.EQ,new BindVariable(toCurrency.getId())));
+		whereClause.add(expression1);
+		
+		Expression expression2 =  new Expression("AND");
+		expression2.add(new Expression("to_currency_id",Operator.EQ,new BindVariable(fromCurrency.getId())));
+		expression2.add(new Expression("from_currency_id",Operator.EQ,new BindVariable(toCurrency.getId())));
+		whereClause.add(expression2);
+		
+		q.where(whereClause);
+		
 		List<CurrencyConversionFactor> cfs = q.execute();
 		if (cfs.isEmpty()){
 			throw new RuntimeException("Don't know to convert from " + fromCurrency.getName() + " tp " + toCurrency.getName());

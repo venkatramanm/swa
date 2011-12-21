@@ -7,8 +7,9 @@ import java.util.Map;
 import com.venky.extension.Extension;
 import com.venky.extension.Registry;
 import com.venky.swa.db.model.Account;
+import com.venky.swf.db.Database;
 import com.venky.swf.db.model.User;
-import com.venky.swf.db.table.Query;
+import com.venky.swf.sql.Select;
 
 public class TransactionParticipantsExtension implements Extension{
 	static {
@@ -20,8 +21,9 @@ public class TransactionParticipantsExtension implements Extension{
 		String fieldName =  (String)context[1];
 		Map<String,List<Integer>> participatingOptions = (Map<String, List<Integer>>)context[2];
 		if (fieldName.equalsIgnoreCase("FROM_ACCOUNT_ID") || fieldName.equalsIgnoreCase("TO_ACCOUNT_ID") ){
-			Query accountQ = new Query(Account.class);
-			accountQ.select().where("1 = 1").and("(" + user.getDataSecurityWhereClause(Account.class) + ")");
+			Select accountQ = new Select().from(Database.getInstance().getTable(Account.class).getTableName());
+			
+			accountQ.where(user.getDataSecurityWhereClause(Account.class));
 			List<Account> accounts = accountQ.execute();
 			List<Integer> accountId = new ArrayList<Integer>();
 			for (Account account:accounts){
