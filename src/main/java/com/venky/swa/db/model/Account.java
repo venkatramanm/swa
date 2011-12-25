@@ -37,7 +37,6 @@ public interface Account extends Model{
 
 	@IS_VIRTUAL
     public double getBalance();
-    public void setBalance(double balance);
     
     @IS_VIRTUAL
     @IS_NULLABLE

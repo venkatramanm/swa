@@ -9,6 +9,7 @@ import com.venky.swa.db.model.Currency;
 import com.venky.swa.db.model.CurrencyConversionFactor;
 import com.venky.swf.db.Database;
 import com.venky.swf.db.table.BindVariable;
+import com.venky.swf.sql.Conjunction;
 import com.venky.swf.sql.Expression;
 import com.venky.swf.sql.Operator;
 import com.venky.swf.sql.Select;
@@ -34,14 +35,14 @@ public class CurrencyConverter {
 		}
 		Select q = new Select();
 		q.from(Database.getInstance().getTable(CurrencyConversionFactor.class).getTableName());
-		Expression whereClause = new Expression("OR");
+		Expression whereClause = new Expression(Conjunction.OR);
 		
-		Expression expression1 =  new Expression("AND");
+		Expression expression1 =  new Expression(Conjunction.AND);
 		expression1.add(new Expression("from_currency_id",Operator.EQ,new BindVariable(fromCurrency.getId())));
 		expression1.add(new Expression("to_currency_id",Operator.EQ,new BindVariable(toCurrency.getId())));
 		whereClause.add(expression1);
 		
-		Expression expression2 =  new Expression("AND");
+		Expression expression2 =  new Expression(Conjunction.AND);
 		expression2.add(new Expression("to_currency_id",Operator.EQ,new BindVariable(fromCurrency.getId())));
 		expression2.add(new Expression("from_currency_id",Operator.EQ,new BindVariable(toCurrency.getId())));
 		whereClause.add(expression2);

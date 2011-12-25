@@ -11,22 +11,16 @@ public class AccountImpl extends ModelImpl<Account>{
 		super(accountClass,record);
 	}
 	
-	private double balance = -1; 
 	public double getBalance(){
-		if (balance == -1){
-			balance = 0;
-			for (Transaction t : getChildren(Transaction.class)){
-				double tamt = 0 ; 
-				if (t.getFromAccountId() != t.getToAccountId()){
-					tamt = t.getTransactionAmount() * (t.getFromAccountId() == getProxy().getId() ? -1 : 1) * CurrencyConverter.getInstance().getConversionFactor(t.getCurrency(),getProxy().getCurrency());
-				}
-				balance += tamt;
+		double balance = 0;
+		for (Transaction t : getChildren(Transaction.class)){
+			double tamt = 0 ; 
+			if (t.getFromAccountId() != t.getToAccountId()){
+				tamt = t.getTransactionAmount() * (t.getFromAccountId() == getProxy().getId() ? -1 : 1) * CurrencyConverter.getInstance().getConversionFactor(t.getCurrency(),getProxy().getCurrency());
 			}
+			balance += tamt;
 		}
 		return balance;
-	}
-	public void setBalance(double balance){ 
-		this.balance = balance;
 	}
 	
 	
