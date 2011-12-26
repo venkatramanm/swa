@@ -11,6 +11,9 @@ public class TaxCalculator {
 		double TEN_PCT_SLAB = 320000;
 		double TWENTY_PCT_SLAB = 300000;
 		
+		if (incomeAccount == null || incomeAccount.getName() == null){
+			return tax;
+		}
 		if (incomeAccount.getName().matches("INCOME.*AY.*12-13") && incomeAccount.getAccountType().getName().equals("INCOME")){
 			tax = 0.0;
 			income -= FREE_SLAB;
