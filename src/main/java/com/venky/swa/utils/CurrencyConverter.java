@@ -34,7 +34,7 @@ public class CurrencyConverter {
 			return cf;
 		}
 		Select q = new Select();
-		q.from(Database.getInstance().getTable(CurrencyConversionFactor.class).getTableName());
+		q.from(CurrencyConversionFactor.class);
 		Expression whereClause = new Expression(Conjunction.OR);
 		
 		Expression expression1 =  new Expression(Conjunction.AND);

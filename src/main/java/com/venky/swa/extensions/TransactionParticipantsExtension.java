@@ -21,7 +21,7 @@ public class TransactionParticipantsExtension implements Extension{
 		String fieldName =  (String)context[1];
 		Map<String,List<Integer>> participatingOptions = (Map<String, List<Integer>>)context[2];
 		if (fieldName.equalsIgnoreCase("FROM_ACCOUNT_ID") || fieldName.equalsIgnoreCase("TO_ACCOUNT_ID") ){
-			Select accountQ = new Select().from(Database.getInstance().getTable(Account.class).getTableName());
+			Select accountQ = new Select().from(Account.class);
 			
 			accountQ.where(user.getDataSecurityWhereClause(Account.class));
 			List<Account> accounts = accountQ.execute();
