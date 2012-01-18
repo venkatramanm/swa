@@ -7,7 +7,6 @@ import java.util.List;
 import com.venky.core.date.DateUtils;
 import com.venky.swa.db.model.Currency;
 import com.venky.swa.db.model.CurrencyConversionFactor;
-import com.venky.swf.db.Database;
 import com.venky.swf.db.table.BindVariable;
 import com.venky.swf.sql.Conjunction;
 import com.venky.swf.sql.Expression;
