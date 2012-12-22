@@ -29,12 +29,7 @@
     <dependency>
     	<groupId>com.github.venkatramanm.swf-all</groupId>
     	<artifactId>swf</artifactId>
-    	<version>1.0</version>
+    	<version>1.10</version>
     </dependency>
-  	<dependency>
-  		<groupId>com.github.venkatramanm.swf-all</groupId>
-  		<artifactId>swf-plugin-security</artifactId>
-  		<version>1.0</version>
-  	</dependency>
   </dependencies>
 </project>

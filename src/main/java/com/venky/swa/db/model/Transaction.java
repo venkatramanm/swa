@@ -3,12 +3,14 @@ package com.venky.swa.db.model;
 import java.sql.Date;
 
 import com.venky.swf.db.annotations.column.COLUMN_DEF;
+import com.venky.swf.db.annotations.column.IS_NULLABLE;
 import com.venky.swf.db.annotations.column.IS_VIRTUAL;
 import com.venky.swf.db.annotations.column.defaulting.StandardDefault;
 import com.venky.swf.db.annotations.column.pm.PARTICIPANT;
-import com.venky.swf.db.annotations.column.validations.Mandatory;
+import com.venky.swf.db.annotations.model.MENU;
 import com.venky.swf.db.model.Model;
 
+@MENU("Manage")
 public interface Transaction extends Model{
 	@IS_VIRTUAL
 	public int getTransactionAge();
@@ -20,25 +22,25 @@ public interface Transaction extends Model{
 	public String getDescription();
 	public void setDescription(String description);
 	
-	@Mandatory
+	@IS_NULLABLE(false)
 	@PARTICIPANT
-	public int getFromAccountId();
-	public void setFromAccountId(int fromAccountId);
+	public Integer getFromAccountId();
+	public void setFromAccountId(Integer fromAccountId);
 	public Account getFromAccount();
 	
-	@Mandatory
+	@IS_NULLABLE(false)
 	@PARTICIPANT
-	public int getToAccountId();
-	public void setToAccountId(int toAccountId);
+	public Integer getToAccountId();
+	public void setToAccountId(Integer toAccountId);
 	public Account getToAccount();
 	
 	public double getTransactionAmount(); 
 	public void setTransactionAmount(double transactionAmount);
 
-	@Mandatory
+	@IS_NULLABLE(false)
 	@COLUMN_DEF(StandardDefault.ONE)
-	public int getCurrencyId();
-	public void setCurrencyId(int currencyId);
+	public Integer getCurrencyId();
+	public void setCurrencyId(Integer currencyId);
 	public Currency getCurrency();
 	
 }

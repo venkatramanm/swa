@@ -4,12 +4,12 @@ import java.sql.Date;
 
 import com.venky.core.date.DateUtils;
 import com.venky.swf.db.table.ModelImpl;
-import com.venky.swf.db.table.Record;
+import com.venky.swf.exceptions.MultiException;
 
 public class TransactionImpl extends ModelImpl<Transaction>{
 
-	public TransactionImpl(Class<Transaction> modelClass, Record record) {
-		super(modelClass, record);
+	public TransactionImpl(Transaction proxy) {
+		super(proxy);
 	}
 	public int getTransactionAge(){
 		Date tDate = getProxy().getTransactionDate();
@@ -21,21 +21,21 @@ public class TransactionImpl extends ModelImpl<Transaction>{
 		return 0;
 	}
 	@Override
-	protected boolean isModelValid(StringBuilder totalMessage) {
-		boolean valid = super.isModelValid(totalMessage);
+	protected boolean isModelValid(MultiException ex) {
+		boolean valid = super.isModelValid(ex);
 		if (valid){
 			Transaction t = getProxy();
 			if (t.getFromAccount() == null){
-				totalMessage.append("Invalid From Account<br/>");
+				ex.add(new RuntimeException("Invalid From Account"));
 				valid = false; 
 			}
 			if (t.getToAccount() == null){
-				totalMessage.append("Invalid To Account<br/>");
+				ex.add(new RuntimeException("Invalid To Account"));
 				valid = false; 
 			}
 			
 			if (t.getFromAccountId() == t.getToAccountId()){
-				totalMessage.append("From and to Accounts are same!<br/>");
+				ex.add(new RuntimeException("From and to Accounts are same!"));
 				valid = false;
 			}
 			

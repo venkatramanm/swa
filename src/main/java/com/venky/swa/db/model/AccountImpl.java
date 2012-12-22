@@ -3,12 +3,11 @@ package com.venky.swa.db.model;
 import com.venky.swa.utils.CurrencyConverter;
 import com.venky.swa.utils.TaxCalculator;
 import com.venky.swf.db.table.ModelImpl;
-import com.venky.swf.db.table.Record;
 
 public class AccountImpl extends ModelImpl<Account>{
 
-	public AccountImpl(Class<Account> accountClass,Record record) {
-		super(accountClass,record);
+	public AccountImpl(Account proxy) {
+		super(proxy);
 	}
 	
 	public double getBalance(){

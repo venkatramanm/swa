@@ -5,11 +5,12 @@ import java.sql.Date;
 import com.venky.swf.db.annotations.column.COLUMN_DEF;
 import com.venky.swf.db.annotations.column.IS_NULLABLE;
 import com.venky.swf.db.annotations.column.defaulting.StandardDefault;
-import com.venky.swf.db.annotations.column.validations.Mandatory;
 import com.venky.swf.db.annotations.model.CONFIGURATION;
+import com.venky.swf.db.annotations.model.MENU;
 import com.venky.swf.db.model.Model;
 
 @CONFIGURATION
+@MENU("Configuration")
 public interface CurrencyConversionFactor extends Model{
 	
 	@COLUMN_DEF(StandardDefault.CURRENT_DATE)
@@ -18,16 +19,17 @@ public interface CurrencyConversionFactor extends Model{
 	public void setAsOn(Date on);
 	
 	public Currency getFromCurrency();
-	@Mandatory
-	public int getFromCurrencyId();
-	public void setFromCurrencyId(int currencyId);
+	@IS_NULLABLE(false)
+	public Integer getFromCurrencyId();
+	public void setFromCurrencyId(Integer currencyId);
 
 	
 	public Currency getToCurrency();
-	@Mandatory
+	
+	@IS_NULLABLE(false)
 	@COLUMN_DEF(StandardDefault.ONE)
-	public int getToCurrencyId();
-	public void setToCurrencyId(int currencyId);
+	public Integer getToCurrencyId();
+	public void setToCurrencyId(Integer currencyId);
 	
 	public double getConversionFactor();
 	public void setConversionFactor(double conversionFactor);

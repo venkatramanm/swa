@@ -22,12 +22,15 @@ public class UserTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        Database.getInstance().open();
+    	Database db = Database.getInstance();
+        db.open(null);
     }
 
     @AfterClass
     public static void tearDownClass() throws Exception {
-        Database.getInstance().close();
+    	Database db = Database.getInstance();
+    	db.getCurrentTransaction().rollback(null);
+        db.close();
     }
 
     @Before
@@ -40,7 +43,7 @@ public class UserTest {
 
     @Test
     public void testSomeMethod() {
-        Table<User> userTable = Database.getInstance().getTable(User.class);
+        Table<User> userTable = Database.getTable(User.class);
         User user = userTable.newRecord();
         user.setPassword("venky12");
         user.setName("Venky");
