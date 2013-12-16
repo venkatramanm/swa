@@ -1,0 +1,10 @@
+#!/bin/env bash
+ServerPath=`dirname $0`
+AppPath=${ServerPath%/*}
+
+cd ${AppPath}
+source ~venky/.bash_aliases
+echo "Starting ${app} on ${port}"
+
+mvn compile exec:java -DPORT=${port} -Dexec.mainClass="com.venky.swf.JettyServer" -Dswf.env=production -Dderby.locks.waitTimeout=10 -Dswf.pidfile=${AppPath}/tmp/${app}.pid -Dexec.args=" -ea com.venky  -XX:+HeapDumpOnOutOfMemoryError -XX:+HeapDumpOnCtrlBreak" 
+
